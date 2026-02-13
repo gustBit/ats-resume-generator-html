@@ -130,10 +130,7 @@ export function renderResumeHtml(
       "{{LINKEDIN_TEXT}}",
       data.linkedin_url.replace(/^https?:\/\//, ""),
     )
-    .replaceAll(
-      "{{GITHUB_TEXT}}",
-      data.github_url.replace(/^https?:\/\//, ""),
-    )
+    .replaceAll("{{GITHUB_TEXT}}", data.github_url.replace(/^https?:\/\//, ""))
     .replaceAll(
       "{{WEBSITE_TEXT}}",
       data.website_url.replace(/^https?:\/\//, ""),

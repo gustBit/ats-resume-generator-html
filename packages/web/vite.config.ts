@@ -42,7 +42,8 @@ function atsResumePlugin(): Plugin {
 
       // PDF export endpoint
       server.middlewares.use(async (req, res, next) => {
-        if (req.url !== "/api/export-pdf" || req.method !== "POST") return next();
+        if (req.url !== "/api/export-pdf" || req.method !== "POST")
+          return next();
 
         let body = "";
         req.on("data", (chunk: Buffer) => (body += chunk.toString()));
@@ -57,13 +58,22 @@ function atsResumePlugin(): Plugin {
             );
 
             const data = JSON.parse(body);
-            const templateHtml = readFileSync(resolve(coreDir, "templates/ats.html"), "utf-8");
-            const css = readFileSync(resolve(coreDir, "templates/style.css"), "utf-8");
+            const templateHtml = readFileSync(
+              resolve(coreDir, "templates/ats.html"),
+              "utf-8",
+            );
+            const css = readFileSync(
+              resolve(coreDir, "templates/style.css"),
+              "utf-8",
+            );
             const html = renderResumeHtml(data, templateHtml, css);
             const pdfBuffer = await exportPdf(html);
 
             res.setHeader("Content-Type", "application/pdf");
-            res.setHeader("Content-Disposition", "attachment; filename=resume.pdf");
+            res.setHeader(
+              "Content-Disposition",
+              "attachment; filename=resume.pdf",
+            );
             res.end(pdfBuffer);
           } catch (err: any) {
             console.error("PDF export error:", err);

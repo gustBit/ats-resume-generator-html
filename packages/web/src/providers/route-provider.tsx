@@ -4,9 +4,7 @@ import { RouterProvider as AriaRouterProvider } from "react-aria-components";
 declare module "react-aria-components" {
   interface RouterConfig {
     href: string;
-    routerOptions: NonNullable<
-      Parameters<ReturnType<typeof useNavigate>>[1]
-    >;
+    routerOptions: NonNullable<Parameters<ReturnType<typeof useNavigate>>[1]>;
   }
 }
 

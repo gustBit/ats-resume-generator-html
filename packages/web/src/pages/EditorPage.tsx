@@ -13,9 +13,18 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Label({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) {
+function Label({
+  children,
+  htmlFor,
+}: {
+  children: React.ReactNode;
+  htmlFor?: string;
+}) {
   return (
-    <label htmlFor={htmlFor} className="block text-sm font-medium text-text-secondary mb-1">
+    <label
+      htmlFor={htmlFor}
+      className="block text-sm font-medium text-text-secondary mb-1"
+    >
       {children}
     </label>
   );
@@ -93,7 +102,10 @@ function Button({
       "bg-error-50 text-error-700 hover:bg-error-100 border border-error-300",
   };
   return (
-    <button onClick={onClick} className={`${base} ${variants[variant]} ${className}`}>
+    <button
+      onClick={onClick}
+      className={`${base} ${variants[variant]} ${className}`}
+    >
       {children}
     </button>
   );
@@ -154,7 +166,10 @@ export default function EditorPage() {
             <Button variant="secondary" onClick={loadExample}>
               Load Example
             </Button>
-            <Button variant="secondary" onClick={() => fileRef.current?.click()}>
+            <Button
+              variant="secondary"
+              onClick={() => fileRef.current?.click()}
+            >
               Import JSON
             </Button>
             <input
@@ -203,13 +218,27 @@ export default function EditorPage() {
 
           {/* tab content */}
           <div className="bg-bg-primary rounded-xl border border-border-secondary shadow-xs p-6">
-            {activeTab === "Personal" && <PersonalTab resume={resume} setField={setField} />}
-            {activeTab === "Summary" && <SummaryTab resume={resume} setField={setField} />}
-            {activeTab === "Skills" && <SkillsTab resume={resume} dispatch={dispatch} />}
-            {activeTab === "Projects" && <ProjectsTab resume={resume} dispatch={dispatch} />}
-            {activeTab === "Experience" && <ExperienceTab resume={resume} dispatch={dispatch} />}
-            {activeTab === "Education" && <EducationTab resume={resume} dispatch={dispatch} />}
-            {activeTab === "Languages" && <LanguagesTab resume={resume} dispatch={dispatch} />}
+            {activeTab === "Personal" && (
+              <PersonalTab resume={resume} setField={setField} />
+            )}
+            {activeTab === "Summary" && (
+              <SummaryTab resume={resume} setField={setField} />
+            )}
+            {activeTab === "Skills" && (
+              <SkillsTab resume={resume} dispatch={dispatch} />
+            )}
+            {activeTab === "Projects" && (
+              <ProjectsTab resume={resume} dispatch={dispatch} />
+            )}
+            {activeTab === "Experience" && (
+              <ExperienceTab resume={resume} dispatch={dispatch} />
+            )}
+            {activeTab === "Education" && (
+              <EducationTab resume={resume} dispatch={dispatch} />
+            )}
+            {activeTab === "Languages" && (
+              <LanguagesTab resume={resume} dispatch={dispatch} />
+            )}
           </div>
         </div>
 
@@ -218,7 +247,9 @@ export default function EditorPage() {
           <div className="w-1/2 min-w-[400px] sticky top-[73px] self-start">
             <div className="bg-bg-primary rounded-xl border border-border-secondary shadow-xs overflow-hidden">
               <div className="px-4 py-2 bg-bg-secondary border-b border-border-secondary">
-                <span className="text-sm font-medium text-text-tertiary">Live Preview</span>
+                <span className="text-sm font-medium text-text-tertiary">
+                  Live Preview
+                </span>
               </div>
               <iframe
                 title="Resume Preview"
@@ -251,27 +282,58 @@ function PersonalTab({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="name">Full Name</Label>
-          <Input id="name" value={resume.name} onChange={(v) => setField("name", v)} placeholder="John Doe" />
+          <Input
+            id="name"
+            value={resume.name}
+            onChange={(v) => setField("name", v)}
+            placeholder="John Doe"
+          />
         </div>
         <div>
           <Label htmlFor="title">Title / Headline</Label>
-          <Input id="title" value={resume.title} onChange={(v) => setField("title", v)} placeholder="Full Stack Developer" />
+          <Input
+            id="title"
+            value={resume.title}
+            onChange={(v) => setField("title", v)}
+            placeholder="Full Stack Developer"
+          />
         </div>
         <div>
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" value={resume.email} onChange={(v) => setField("email", v)} placeholder="john@example.com" />
+          <Input
+            id="email"
+            type="email"
+            value={resume.email}
+            onChange={(v) => setField("email", v)}
+            placeholder="john@example.com"
+          />
         </div>
         <div>
           <Label htmlFor="location">Location</Label>
-          <Input id="location" value={resume.location} onChange={(v) => setField("location", v)} placeholder="Remote / City, Country" />
+          <Input
+            id="location"
+            value={resume.location}
+            onChange={(v) => setField("location", v)}
+            placeholder="Remote / City, Country"
+          />
         </div>
         <div>
           <Label htmlFor="phone_display">Phone (Display)</Label>
-          <Input id="phone_display" value={resume.phone_display} onChange={(v) => setField("phone_display", v)} placeholder="(00) 00000-0000" />
+          <Input
+            id="phone_display"
+            value={resume.phone_display}
+            onChange={(v) => setField("phone_display", v)}
+            placeholder="(00) 00000-0000"
+          />
         </div>
         <div>
           <Label htmlFor="phone_e164">Phone (E.164)</Label>
-          <Input id="phone_e164" value={resume.phone_e164} onChange={(v) => setField("phone_e164", v)} placeholder="+10000000000" />
+          <Input
+            id="phone_e164"
+            value={resume.phone_e164}
+            onChange={(v) => setField("phone_e164", v)}
+            placeholder="+10000000000"
+          />
         </div>
       </div>
 
@@ -280,15 +342,30 @@ function PersonalTab({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <Label htmlFor="linkedin_url">LinkedIn URL</Label>
-          <Input id="linkedin_url" value={resume.linkedin_url} onChange={(v) => setField("linkedin_url", v)} placeholder="https://linkedin.com/in/…" />
+          <Input
+            id="linkedin_url"
+            value={resume.linkedin_url}
+            onChange={(v) => setField("linkedin_url", v)}
+            placeholder="https://linkedin.com/in/…"
+          />
         </div>
         <div>
           <Label htmlFor="github_url">GitHub URL</Label>
-          <Input id="github_url" value={resume.github_url} onChange={(v) => setField("github_url", v)} placeholder="https://github.com/…" />
+          <Input
+            id="github_url"
+            value={resume.github_url}
+            onChange={(v) => setField("github_url", v)}
+            placeholder="https://github.com/…"
+          />
         </div>
         <div>
           <Label htmlFor="website_url">Website URL</Label>
-          <Input id="website_url" value={resume.website_url} onChange={(v) => setField("website_url", v)} placeholder="https://example.com" />
+          <Input
+            id="website_url"
+            value={resume.website_url}
+            onChange={(v) => setField("website_url", v)}
+            placeholder="https://example.com"
+          />
         </div>
       </div>
     </div>
@@ -331,23 +408,33 @@ function SkillsTab({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <SectionTitle>Skills</SectionTitle>
-        <Button variant="secondary" onClick={() => dispatch({ type: "ADD_SKILL_GROUP" })}>
+        <Button
+          variant="secondary"
+          onClick={() => dispatch({ type: "ADD_SKILL_GROUP" })}
+        >
           + Add Group
         </Button>
       </div>
 
       {resume.skills.length === 0 && (
-        <p className="text-sm text-text-quaternary">No skill groups yet. Add one to get started.</p>
+        <p className="text-sm text-text-quaternary">
+          No skill groups yet. Add one to get started.
+        </p>
       )}
 
       {resume.skills.map((group, i) => (
-        <div key={i} className="flex gap-3 items-start p-4 rounded-lg border border-border-secondary bg-bg-secondary">
+        <div
+          key={i}
+          className="flex gap-3 items-start p-4 rounded-lg border border-border-secondary bg-bg-secondary"
+        >
           <div className="flex-1 space-y-3">
             <div>
               <Label>Group Name</Label>
               <Input
                 value={group.group}
-                onChange={(v) => dispatch({ type: "SET_SKILL_GROUP_NAME", index: i, value: v })}
+                onChange={(v) =>
+                  dispatch({ type: "SET_SKILL_GROUP_NAME", index: i, value: v })
+                }
                 placeholder="e.g. Programming"
               />
             </div>
@@ -355,12 +442,21 @@ function SkillsTab({
               <Label>Skills (comma-separated)</Label>
               <Input
                 value={group.items.join(", ")}
-                onChange={(v) => dispatch({ type: "SET_SKILL_GROUP_ITEMS", index: i, value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_SKILL_GROUP_ITEMS",
+                    index: i,
+                    value: v,
+                  })
+                }
                 placeholder="JavaScript, Node.js, React"
               />
             </div>
           </div>
-          <Button variant="destructive" onClick={() => dispatch({ type: "REMOVE_SKILL_GROUP", index: i })}>
+          <Button
+            variant="destructive"
+            onClick={() => dispatch({ type: "REMOVE_SKILL_GROUP", index: i })}
+          >
             Remove
           </Button>
         </div>
@@ -382,7 +478,10 @@ function ProjectsTab({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <SectionTitle>Projects</SectionTitle>
-        <Button variant="secondary" onClick={() => dispatch({ type: "ADD_PROJECT" })}>
+        <Button
+          variant="secondary"
+          onClick={() => dispatch({ type: "ADD_PROJECT" })}
+        >
           + Add Project
         </Button>
       </div>
@@ -392,10 +491,18 @@ function ProjectsTab({
       )}
 
       {resume.projects.map((proj, i) => (
-        <div key={i} className="space-y-3 p-4 rounded-lg border border-border-secondary bg-bg-secondary">
+        <div
+          key={i}
+          className="space-y-3 p-4 rounded-lg border border-border-secondary bg-bg-secondary"
+        >
           <div className="flex justify-between items-center">
-            <span className="text-sm font-semibold text-text-primary">Project {i + 1}</span>
-            <Button variant="destructive" onClick={() => dispatch({ type: "REMOVE_PROJECT", index: i })}>
+            <span className="text-sm font-semibold text-text-primary">
+              Project {i + 1}
+            </span>
+            <Button
+              variant="destructive"
+              onClick={() => dispatch({ type: "REMOVE_PROJECT", index: i })}
+            >
               Remove
             </Button>
           </div>
@@ -404,7 +511,14 @@ function ProjectsTab({
               <Label>Title</Label>
               <Input
                 value={proj.title}
-                onChange={(v) => dispatch({ type: "SET_PROJECT_FIELD", index: i, field: "title", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_PROJECT_FIELD",
+                    index: i,
+                    field: "title",
+                    value: v,
+                  })
+                }
                 placeholder="Project name"
               />
             </div>
@@ -412,7 +526,14 @@ function ProjectsTab({
               <Label>Stack</Label>
               <Input
                 value={proj.stack}
-                onChange={(v) => dispatch({ type: "SET_PROJECT_FIELD", index: i, field: "stack", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_PROJECT_FIELD",
+                    index: i,
+                    field: "stack",
+                    value: v,
+                  })
+                }
                 placeholder="Node.js, React, PostgreSQL"
               />
             </div>
@@ -421,7 +542,9 @@ function ProjectsTab({
             <Label>Bullet Points (one per line)</Label>
             <Textarea
               value={proj.bullets.join("\n")}
-              onChange={(v) => dispatch({ type: "SET_PROJECT_BULLETS", index: i, value: v })}
+              onChange={(v) =>
+                dispatch({ type: "SET_PROJECT_BULLETS", index: i, value: v })
+              }
               placeholder="Describe what you built…"
               rows={3}
             />
@@ -430,8 +553,13 @@ function ProjectsTab({
           {/* links */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-text-secondary">Links</span>
-              <Button variant="secondary" onClick={() => dispatch({ type: "ADD_PROJECT_LINK", index: i })}>
+              <span className="text-sm font-medium text-text-secondary">
+                Links
+              </span>
+              <Button
+                variant="secondary"
+                onClick={() => dispatch({ type: "ADD_PROJECT_LINK", index: i })}
+              >
                 + Add Link
               </Button>
             </div>
@@ -441,7 +569,15 @@ function ProjectsTab({
                   <Label>Label</Label>
                   <Input
                     value={link.label}
-                    onChange={(v) => dispatch({ type: "SET_PROJECT_LINK", index: i, linkIndex: li, field: "label", value: v })}
+                    onChange={(v) =>
+                      dispatch({
+                        type: "SET_PROJECT_LINK",
+                        index: i,
+                        linkIndex: li,
+                        field: "label",
+                        value: v,
+                      })
+                    }
                     placeholder="Repository"
                   />
                 </div>
@@ -449,11 +585,28 @@ function ProjectsTab({
                   <Label>URL</Label>
                   <Input
                     value={link.url}
-                    onChange={(v) => dispatch({ type: "SET_PROJECT_LINK", index: i, linkIndex: li, field: "url", value: v })}
+                    onChange={(v) =>
+                      dispatch({
+                        type: "SET_PROJECT_LINK",
+                        index: i,
+                        linkIndex: li,
+                        field: "url",
+                        value: v,
+                      })
+                    }
                     placeholder="https://github.com/…"
                   />
                 </div>
-                <Button variant="destructive" onClick={() => dispatch({ type: "REMOVE_PROJECT_LINK", index: i, linkIndex: li })}>
+                <Button
+                  variant="destructive"
+                  onClick={() =>
+                    dispatch({
+                      type: "REMOVE_PROJECT_LINK",
+                      index: i,
+                      linkIndex: li,
+                    })
+                  }
+                >
                   ✕
                 </Button>
               </div>
@@ -478,7 +631,10 @@ function ExperienceTab({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <SectionTitle>Experience</SectionTitle>
-        <Button variant="secondary" onClick={() => dispatch({ type: "ADD_EXPERIENCE" })}>
+        <Button
+          variant="secondary"
+          onClick={() => dispatch({ type: "ADD_EXPERIENCE" })}
+        >
           + Add Experience
         </Button>
       </div>
@@ -488,10 +644,18 @@ function ExperienceTab({
       )}
 
       {resume.experience.map((exp, i) => (
-        <div key={i} className="space-y-3 p-4 rounded-lg border border-border-secondary bg-bg-secondary">
+        <div
+          key={i}
+          className="space-y-3 p-4 rounded-lg border border-border-secondary bg-bg-secondary"
+        >
           <div className="flex justify-between items-center">
-            <span className="text-sm font-semibold text-text-primary">Experience {i + 1}</span>
-            <Button variant="destructive" onClick={() => dispatch({ type: "REMOVE_EXPERIENCE", index: i })}>
+            <span className="text-sm font-semibold text-text-primary">
+              Experience {i + 1}
+            </span>
+            <Button
+              variant="destructive"
+              onClick={() => dispatch({ type: "REMOVE_EXPERIENCE", index: i })}
+            >
               Remove
             </Button>
           </div>
@@ -500,7 +664,14 @@ function ExperienceTab({
               <Label>Role</Label>
               <Input
                 value={exp.role}
-                onChange={(v) => dispatch({ type: "SET_EXPERIENCE_FIELD", index: i, field: "role", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_EXPERIENCE_FIELD",
+                    index: i,
+                    field: "role",
+                    value: v,
+                  })
+                }
                 placeholder="Software Engineer"
               />
             </div>
@@ -508,7 +679,14 @@ function ExperienceTab({
               <Label>Company</Label>
               <Input
                 value={exp.company}
-                onChange={(v) => dispatch({ type: "SET_EXPERIENCE_FIELD", index: i, field: "company", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_EXPERIENCE_FIELD",
+                    index: i,
+                    field: "company",
+                    value: v,
+                  })
+                }
                 placeholder="Company Name"
               />
             </div>
@@ -516,7 +694,14 @@ function ExperienceTab({
               <Label>Date</Label>
               <Input
                 value={exp.date}
-                onChange={(v) => dispatch({ type: "SET_EXPERIENCE_FIELD", index: i, field: "date", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_EXPERIENCE_FIELD",
+                    index: i,
+                    field: "date",
+                    value: v,
+                  })
+                }
                 placeholder="2021 — Present"
               />
             </div>
@@ -525,7 +710,9 @@ function ExperienceTab({
             <Label>Bullet Points (one per line)</Label>
             <Textarea
               value={exp.bullets.join("\n")}
-              onChange={(v) => dispatch({ type: "SET_EXPERIENCE_BULLETS", index: i, value: v })}
+              onChange={(v) =>
+                dispatch({ type: "SET_EXPERIENCE_BULLETS", index: i, value: v })
+              }
               placeholder="Describe responsibilities and achievements…"
               rows={4}
             />
@@ -549,20 +736,33 @@ function EducationTab({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <SectionTitle>Education</SectionTitle>
-        <Button variant="secondary" onClick={() => dispatch({ type: "ADD_EDUCATION" })}>
+        <Button
+          variant="secondary"
+          onClick={() => dispatch({ type: "ADD_EDUCATION" })}
+        >
           + Add Education
         </Button>
       </div>
 
       {resume.education.length === 0 && (
-        <p className="text-sm text-text-quaternary">No education entries yet.</p>
+        <p className="text-sm text-text-quaternary">
+          No education entries yet.
+        </p>
       )}
 
       {resume.education.map((edu, i) => (
-        <div key={i} className="space-y-3 p-4 rounded-lg border border-border-secondary bg-bg-secondary">
+        <div
+          key={i}
+          className="space-y-3 p-4 rounded-lg border border-border-secondary bg-bg-secondary"
+        >
           <div className="flex justify-between items-center">
-            <span className="text-sm font-semibold text-text-primary">Education {i + 1}</span>
-            <Button variant="destructive" onClick={() => dispatch({ type: "REMOVE_EDUCATION", index: i })}>
+            <span className="text-sm font-semibold text-text-primary">
+              Education {i + 1}
+            </span>
+            <Button
+              variant="destructive"
+              onClick={() => dispatch({ type: "REMOVE_EDUCATION", index: i })}
+            >
               Remove
             </Button>
           </div>
@@ -571,7 +771,14 @@ function EducationTab({
               <Label>Title / Degree</Label>
               <Input
                 value={edu.title}
-                onChange={(v) => dispatch({ type: "SET_EDUCATION_FIELD", index: i, field: "title", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_EDUCATION_FIELD",
+                    index: i,
+                    field: "title",
+                    value: v,
+                  })
+                }
                 placeholder="Bachelor's in Computer Science"
               />
             </div>
@@ -579,7 +786,14 @@ function EducationTab({
               <Label>School / Institution</Label>
               <Input
                 value={edu.subtitle}
-                onChange={(v) => dispatch({ type: "SET_EDUCATION_FIELD", index: i, field: "subtitle", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_EDUCATION_FIELD",
+                    index: i,
+                    field: "subtitle",
+                    value: v,
+                  })
+                }
                 placeholder="University Name"
               />
             </div>
@@ -587,7 +801,14 @@ function EducationTab({
               <Label>Date</Label>
               <Input
                 value={edu.date}
-                onChange={(v) => dispatch({ type: "SET_EDUCATION_FIELD", index: i, field: "date", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_EDUCATION_FIELD",
+                    index: i,
+                    field: "date",
+                    value: v,
+                  })
+                }
                 placeholder="2019 — 2023"
               />
             </div>
@@ -611,7 +832,10 @@ function LanguagesTab({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <SectionTitle>Languages</SectionTitle>
-        <Button variant="secondary" onClick={() => dispatch({ type: "ADD_LANGUAGE" })}>
+        <Button
+          variant="secondary"
+          onClick={() => dispatch({ type: "ADD_LANGUAGE" })}
+        >
           + Add Language
         </Button>
       </div>
@@ -621,10 +845,18 @@ function LanguagesTab({
       )}
 
       {resume.languages.map((lang, i) => (
-        <div key={i} className="space-y-3 p-4 rounded-lg border border-border-secondary bg-bg-secondary">
+        <div
+          key={i}
+          className="space-y-3 p-4 rounded-lg border border-border-secondary bg-bg-secondary"
+        >
           <div className="flex justify-between items-center">
-            <span className="text-sm font-semibold text-text-primary">Language {i + 1}</span>
-            <Button variant="destructive" onClick={() => dispatch({ type: "REMOVE_LANGUAGE", index: i })}>
+            <span className="text-sm font-semibold text-text-primary">
+              Language {i + 1}
+            </span>
+            <Button
+              variant="destructive"
+              onClick={() => dispatch({ type: "REMOVE_LANGUAGE", index: i })}
+            >
               Remove
             </Button>
           </div>
@@ -633,7 +865,14 @@ function LanguagesTab({
               <Label>Language</Label>
               <Input
                 value={lang.name}
-                onChange={(v) => dispatch({ type: "SET_LANGUAGE_FIELD", index: i, field: "name", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_LANGUAGE_FIELD",
+                    index: i,
+                    field: "name",
+                    value: v,
+                  })
+                }
                 placeholder="English"
               />
             </div>
@@ -641,7 +880,14 @@ function LanguagesTab({
               <Label>Level</Label>
               <Input
                 value={lang.level}
-                onChange={(v) => dispatch({ type: "SET_LANGUAGE_FIELD", index: i, field: "level", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_LANGUAGE_FIELD",
+                    index: i,
+                    field: "level",
+                    value: v,
+                  })
+                }
                 placeholder="Intermediate"
               />
             </div>
@@ -649,7 +895,14 @@ function LanguagesTab({
               <Label>Note</Label>
               <Input
                 value={lang.note}
-                onChange={(v) => dispatch({ type: "SET_LANGUAGE_FIELD", index: i, field: "note", value: v })}
+                onChange={(v) =>
+                  dispatch({
+                    type: "SET_LANGUAGE_FIELD",
+                    index: i,
+                    field: "note",
+                    value: v,
+                  })
+                }
                 placeholder="Technical reading and writing"
               />
             </div>
