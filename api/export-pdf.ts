@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { buildHtml, exportPdfFromHtml } from "@ats-resume/core/server";
+import { buildHtml, exportPdfFromHtml } from "../packages/core/src/server";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {

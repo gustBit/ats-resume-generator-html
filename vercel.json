@@ -1,5 +1,10 @@
 {
   "devCommand": "pnpm -C packages/web dev --port $PORT",
   "buildCommand": "pnpm build",
-  "outputDirectory": "packages/web/dist"
+  "outputDirectory": "packages/web/dist",
+  "functions": {
+    "api/export-pdf.ts": {
+      "includeFiles": "packages/core/templates/**"
+    }
+  }
 }
