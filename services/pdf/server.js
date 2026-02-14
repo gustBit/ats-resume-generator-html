@@ -3,10 +3,11 @@ import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 import cors from "cors";
 
+const app = express();
+
 app.use(cors({ origin: true }));
 app.options("*", cors());
 
-const app = express();
 app.use(express.json({ limit: "15mb" }));
 
 app.get("/health", (_req, res) => res.status(200).json({ ok: true }));
