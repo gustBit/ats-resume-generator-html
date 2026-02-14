@@ -39,49 +39,6 @@ function atsResumePlugin(): Plugin {
         }
         next();
       });
-
-      // PDF export endpoint
-      server.middlewares.use(async (req, res, next) => {
-        if (req.url !== "/api/export-pdf" || req.method !== "POST")
-          return next();
-
-        let body = "";
-        req.on("data", (chunk: Buffer) => (body += chunk.toString()));
-        req.on("end", async () => {
-          try {
-            // Dynamic imports from file paths to avoid Vite bundling Playwright
-            const { renderResumeHtml } = await import(
-              resolve(coreDir, "src/renderer.ts")
-            );
-            const { exportPdf } = await import(
-              resolve(coreDir, "src/pdf-exporter.ts")
-            );
-
-            const data = JSON.parse(body);
-            const templateHtml = readFileSync(
-              resolve(coreDir, "templates/ats.html"),
-              "utf-8",
-            );
-            const css = readFileSync(
-              resolve(coreDir, "templates/style.css"),
-              "utf-8",
-            );
-            const html = renderResumeHtml(data, templateHtml, css);
-            const pdfBuffer = await exportPdf(html);
-
-            res.setHeader("Content-Type", "application/pdf");
-            res.setHeader(
-              "Content-Disposition",
-              "attachment; filename=resume.pdf",
-            );
-            res.end(pdfBuffer);
-          } catch (err: any) {
-            console.error("PDF export error:", err);
-            res.statusCode = 500;
-            res.end(JSON.stringify({ error: err.message }));
-          }
-        });
-      });
     },
   };
 }
@@ -92,11 +49,5 @@ export default defineConfig({
     alias: {
       "@": resolve(__dirname, "./src"),
     },
-  },
-  optimizeDeps: {
-    exclude: ["@ats-resume/core", "playwright"],
-  },
-  ssr: {
-    noExternal: [],
   },
 });

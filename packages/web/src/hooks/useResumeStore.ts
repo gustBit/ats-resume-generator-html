@@ -376,24 +376,26 @@ export function useResumeStore() {
     URL.revokeObjectURL(url);
   }, [resume]);
 
-  const exportPdf = useCallback(async () => {
+  const exportPdf = async () => {
     const res = await fetch("/api/export-pdf", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(resume),
     });
+
     if (!res.ok) {
-      alert("PDF export failed");
-      return;
+      const txt = await res.text();
+      throw new Error(txt);
     }
+
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "resume.pdf";
+    a.download = "cv.pdf";
     a.click();
     URL.revokeObjectURL(url);
-  }, [resume]);
+  };
 
   const toJson = useMemo(() => JSON.stringify(resume, null, 2), [resume]);
 

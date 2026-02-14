@@ -1,22 +1,31 @@
 {
-    "name": "@ats-resume/core",
-    "version": "0.1.0",
-    "private": true,
-    "type": "module",
-    "main": "./src/index.ts",
-    "exports": {
-        ".": "./src/index.ts",
-        "./pdf": "./src/pdf-exporter.ts",
-        "./templates/*": "./templates/*",
-        "./data/*": "./data/*"
+  "name": "@ats-resume/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
-    "scripts": {
-        "postinstall": "npx playwright install chromium",
-        "build": "node scripts/render.mjs",
-        "pdf": "node scripts/export-pdf.mjs"
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
     },
-    "dependencies": {},
-    "devDependencies": {
-        "playwright": "^1.50.0"
-    }
+    "./templates/*": "./templates/*"
+  },
+  "scripts": {
+    "build:core": "pnpm --filter @ats-resume/core build",
+    "dev": "pnpm build:core && pnpm --filter @ats-resume/web dev"
+  },
+  "dependencies": {
+    "@sparticuz/chromium": "^123.0.1",
+    "playwright-core": "^1.58.2"
+  }
 }

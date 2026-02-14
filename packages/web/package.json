@@ -27,5 +27,15 @@
     "tailwindcss": "^4.1.0",
     "typescript": "^5.8.0",
     "vite": "^6.3.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
+    }
   }
 }

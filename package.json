@@ -1,13 +1,16 @@
 {
-  "name": "ats-resume-generator",
+  "name": "@ats-resume/core",
   "private": true,
   "scripts": {
     "dev": "pnpm -C packages/web dev",
-    "build": "pnpm -C packages/web build",
-    "preview": "pnpm -C packages/web preview",
-    "setup": "pnpm install -r"
+    "build": "pnpm -r build",
+    "preview": "pnpm -C packages/web preview"
   },
   "devDependencies": {
-    "@types/node": "^25.2.3"
+    "@ats-resume/core": "workspace:*",
+    "@types/node": "^25.2.3",
+    "@vercel/node": "^5.6.3",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1"
   }
 }
