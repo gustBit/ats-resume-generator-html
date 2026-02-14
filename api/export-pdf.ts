@@ -7,12 +7,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const { buildHtml, exportPdfFromHtml } =
+      await import("../packages/core/dist/server.js");
+
     const raw = req.body;
     const data = typeof raw === "string" ? JSON.parse(raw) : raw;
-
-    // dynamic import para não cair em require() de ESM
-    const { buildHtml, exportPdfFromHtml } =
-      await import("../packages/core/src/server");
 
     const html = await buildHtml(data);
     const pdfBytes: Uint8Array = await exportPdfFromHtml(html);

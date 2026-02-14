@@ -7,19 +7,15 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@ats-resume/core':
-        specifier: workspace:*
-        version: link:packages/core
+    devDependencies:
+      '@types/node':
+        specifier: ^22.2.0
+        version: 22.19.11
       '@vercel/node':
         specifier: ^5.6.3
         version: 5.6.3(rollup@4.57.1)
-    devDependencies:
-      '@types/node':
-        specifier: ^22.19.11
-        version: 22.19.11
       typescript:
-        specifier: ^5.9.3
+        specifier: ^5.9.0
         version: 5.9.3
 
   packages/core:
