@@ -1,9 +1,22 @@
 # dependencies
 node_modules/
 
-# generated output
+# build output
 dist/
-*.pdf
+.out/
+.vercel/
 
-# npm
-package-lock.json
+# generated files
+*.pdf
+*.html
+
+# caches
+.playwright/
+playwright/.cache/
+.vite/
+.cache/
+
+# environment
+.env
+.env.*
+!.env.example

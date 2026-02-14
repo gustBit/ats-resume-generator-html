@@ -359,7 +359,7 @@ export function useResumeStore() {
   }, []);
 
   const loadExample = useCallback(async () => {
-    const res = await fetch("/data/resume.example.json");
+    const res = await fetch("/examples/resume.example.json");
     const data = (await res.json()) as ResumeData;
     dispatch({ type: "REPLACE_ALL", data });
   }, []);

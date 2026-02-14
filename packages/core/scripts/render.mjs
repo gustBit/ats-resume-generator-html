@@ -4,7 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const templatePath = path.join(root, "templates", "ats.html");
 const cssPath = path.join(root, "templates", "style.css");
-const dataPath = path.join(root, "data", "resume.example.json");
+const dataPath = path.join(root, "examples", "resume.example.json");
 const distDir = path.join(root, "dist");
 
 fs.mkdirSync(distDir, { recursive: true });
@@ -111,23 +111,35 @@ function languagesHtml(langs) {
 
 function contactHtml(data) {
   const row1 = [];
-  if (data.email) row1.push(`<a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a>`);
-  if (data.phone_display && data.phone_e164) row1.push(`<a href="tel:${escapeHtml(data.phone_e164)}">${escapeHtml(data.phone_display)}</a>`);
+  if (data.email)
+    row1.push(
+      `<a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a>`,
+    );
+  if (data.phone_display && data.phone_e164)
+    row1.push(
+      `<a href="tel:${escapeHtml(data.phone_e164)}">${escapeHtml(data.phone_display)}</a>`,
+    );
   else if (data.phone_display) row1.push(escapeHtml(data.phone_display));
   if (data.location) row1.push(escapeHtml(data.location));
 
   const row2 = [];
   if (data.linkedin_url) {
     const t = data.linkedin_url.replace(/^https?:\/\//, "");
-    row2.push(`<a href="${data.linkedin_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(t)}</a>`);
+    row2.push(
+      `<a href="${data.linkedin_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(t)}</a>`,
+    );
   }
   if (data.github_url) {
     const t = data.github_url.replace(/^https?:\/\//, "");
-    row2.push(`<a href="${data.github_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(t)}</a>`);
+    row2.push(
+      `<a href="${data.github_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(t)}</a>`,
+    );
   }
   if (data.website_url) {
     const t = data.website_url.replace(/^https?:\/\//, "");
-    row2.push(`<a href="${data.website_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(t)}</a>`);
+    row2.push(
+      `<a href="${data.website_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(t)}</a>`,
+    );
   }
 
   const parts = [];
