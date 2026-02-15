@@ -1,3 +1,4 @@
+// packages/web/src/hooks/usePreviewHtml.ts
 import { useEffect, useState } from "react";
 import type { ResumeData } from "@ats-resume/core";
 import { renderResumeHtml } from "@ats-resume/core";
@@ -5,23 +6,30 @@ import { renderResumeHtml } from "@ats-resume/core";
 let _templateHtml = "";
 let _css = "";
 
+function base(path: string) {
+  const b = import.meta.env.BASE_URL ?? "/";
+  return (b.endsWith("/") ? b : b + "/") + path.replace(/^\//, "");
+}
+
+async function loadText(path: string) {
+  const res = await fetch(path, { cache: "no-store" });
+  const text = await res.text();
+  if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
+  return text;
+}
+
 async function loadAssets() {
   if (_templateHtml && _css) return;
 
-  const [tplRes, cssRes] = await Promise.all([
-    fetch("/templates/ats.html", { cache: "no-store" }),
-    fetch("/templates/style.css", { cache: "no-store" }),
-  ]);
+  const tplPath = base("templates/ats.html");
+  const cssPath = base("templates/style.css");
 
-  if (!tplRes.ok) throw new Error(`ats.html fetch failed: ${tplRes.status}`);
-  if (!cssRes.ok) throw new Error(`style.css fetch failed: ${cssRes.status}`);
+  const [tpl, css] = await Promise.all([loadText(tplPath), loadText(cssPath)]);
 
-  const [tpl, css] = await Promise.all([tplRes.text(), cssRes.text()]);
-
-  // evita cachear HTML errado (ex: index.html de SPA)
-  if (!tpl.includes("{{NAME}}"))
+  // anti-fallback: se vier index.html da SPA, normalmente não tem {{NAME}}
+  if (!tpl.includes("{{NAME}}") || !tpl.includes("{{SKILLS_HTML}}")) {
     throw new Error("ats.html is not the resume template");
-  if (css.length < 20) throw new Error("style.css looks empty");
+  }
 
   _templateHtml = tpl;
   _css = css;
@@ -31,17 +39,14 @@ export function usePreviewHtml(resume: ResumeData) {
   const [html, setHtml] = useState("");
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      (async () => {
-        try {
-          await loadAssets();
-          const rendered = renderResumeHtml(resume, _templateHtml, _css);
-          setHtml(rendered);
-        } catch (e) {
-          console.error("[usePreviewHtml] failed", e);
-          setHtml("");
-        }
-      })();
+    const timer = setTimeout(async () => {
+      try {
+        await loadAssets();
+        setHtml(renderResumeHtml(resume, _templateHtml, _css));
+      } catch (e) {
+        console.error("[usePreviewHtml] failed", e);
+        setHtml("");
+      }
     }, 300);
 
     return () => clearTimeout(timer);

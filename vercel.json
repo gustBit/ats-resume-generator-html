@@ -2,8 +2,9 @@
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm --filter @ats-resume/core build && pnpm --filter @ats-resume/web build",
   "outputDirectory": "packages/web/dist",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/templates/(.*)", "destination": "/templates/$1" },
+    { "source": "/examples/(.*)", "destination": "/examples/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

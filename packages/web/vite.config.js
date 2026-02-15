@@ -1,18 +1,18 @@
-// packages/web/vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import { resolve } from "path";
-import { readFileSync } from "fs";
+import { resolve } from "node:path";
+import { readFileSync } from "node:fs";
 /**
  * Dev-only plugin:
- * - Serves /templates/* and /data/* from packages/core during `vite dev`
+ * serve templates/data from packages/core while running `vite dev`.
+ * In production we serve from /public (copied to dist).
  */
 function atsResumeDevAssetsPlugin() {
     const coreDir = resolve(__dirname, "../core");
     return {
         name: "ats-resume-dev-assets",
-        apply: "serve", // IMPORTANT: do not run on `vite build`
+        apply: "serve",
         configureServer(server) {
             server.middlewares.use((req, res, next) => {
                 if (!req.url)
@@ -40,13 +40,21 @@ function atsResumeDevAssetsPlugin() {
         },
     };
 }
-export default defineConfig({
-    plugins: [react(), tailwindcss(), atsResumeDevAssetsPlugin()],
-    resolve: {
-        alias: {
-            "@": resolve(__dirname, "./src"),
-            "@ats-resume/core": resolve(__dirname, "../core/src/index.ts"),
-            "@ats-resume/core/": resolve(__dirname, "../core/src/"),
+export default defineConfig(({ command }) => {
+    const isDev = command === "serve";
+    return {
+        plugins: [react(), tailwindcss(), atsResumeDevAssetsPlugin()],
+        resolve: {
+            alias: {
+                "@": resolve(__dirname, "./src"),
+                ...(isDev
+                    ? {
+                        // só no dev (evita build/CI depender de ../core/src)
+                        "@ats-resume/core": resolve(__dirname, "../core/src/index.ts"),
+                        "@ats-resume/core/": resolve(__dirname, "../core/src/"),
+                    }
+                    : {}),
+            },
         },
-    },
+    };
 });
