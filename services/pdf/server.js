@@ -2,6 +2,12 @@ import express from "express";
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 import cors from "cors";
+import { Redis } from "@upstash/redis";
+
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL,
+  token: process.env.KV_REST_API_TOKEN,
+});
 
 const app = express();
 
@@ -37,6 +43,11 @@ app.post("/export-pdf", async (req, res) => {
       preferCSSPageSize: true,
     });
 
+    // increment only after successful PDF generation (never fail the request if redis is down)
+    try {
+      await redis.incr("metrics:pdfs_total");
+    } catch {}
+
     res.writeHead(200, {
       "Content-Type": "application/pdf",
       "Content-Disposition": 'attachment; filename="cv.pdf"',
@@ -44,9 +55,9 @@ app.post("/export-pdf", async (req, res) => {
       "Cache-Control": "no-store",
     });
 
-    res.end(pdfBuffer);
+    return res.end(pdfBuffer);
   } catch (e) {
-    res.status(500).json({
+    return res.status(500).json({
       error: "PDF export failed",
       details: String(e?.stack || e),
     });
