@@ -25,22 +25,47 @@ export default function HomePage() {
   });
 
   useEffect(() => {
-    // register a unique user only once per device
-    const registered = localStorage.getItem("atsflow_user_registered");
+    const run = async () => {
+      // register user
+      const registered = localStorage.getItem("atsflow_user_registered");
 
-    if (!registered) {
-      fetch("/api/metrics-user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ clientId: getClientId() }),
-      }).finally(() => localStorage.setItem("atsflow_user_registered", "1"));
-    }
+      if (!registered) {
+        try {
+          const res = await fetch("/api/metrics-user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ clientId: getClientId() }),
+          });
 
-    // fetch metrics for display
-    fetch("/api/metrics")
-      .then((r) => r.json())
-      .then(setStats)
-      .catch(() => {});
+          if (res.ok) {
+            localStorage.setItem("atsflow_user_registered", "1");
+          } else {
+            console.error("metrics-user failed", res.status, await res.text());
+          }
+        } catch (e) {
+          console.error("metrics-user error", e);
+        }
+      }
+
+      // fetch metrics
+      try {
+        const res = await fetch("/api/metrics", { cache: "no-store" });
+        if (!res.ok) {
+          console.error("metrics failed", res.status, await res.text());
+          return;
+        }
+
+        const data = await res.json();
+        setStats({
+          usersTotal: Number(data.usersTotal ?? 0),
+          pdfsTotal: Number(data.pdfsTotal ?? 0),
+        });
+      } catch (e) {
+        console.error("metrics error", e);
+      }
+    };
+
+    run();
   }, []);
 
   return (
