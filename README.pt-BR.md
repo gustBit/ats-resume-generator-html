@@ -1,3 +1,55 @@
+<div align="center">
+<img src="packages/web/public/assets/images/banner-git-ats.png" alt="Logo" width="700" />
+
+ATS-first resume builder focado em clareza, portabilidade e controle total.
+
+Crie, edite e exporte currículos profissionais usando um editor visual limpo.
+
+<p>
+  <img
+    src="https://img.shields.io/github/package-json/v/fabriciotrinndade/ats-resume-generator-html?style=flat-square"
+    alt="Version"
+  />
+  <img
+    src="https://img.shields.io/github/stars/fabriciotrinndade/ats-resume-generator-html?style=flat-square"
+    alt="GitHub Stars"
+  />
+  <img
+    src="https://img.shields.io/github/last-commit/fabriciotrinndade/ats-resume-generator-html?style=flat-square"
+    alt="Last commit"
+  />
+  <img
+    src="https://img.shields.io/github/issues/fabriciotrinndade/ats-resume-generator-html?style=flat-square"
+    alt="Open issues"
+  />
+  <a href="https://discord.gg/XjUaNnFf">
+    <img
+      src="https://img.shields.io/discord/1470457549659705405?style=flat-square&label=discord"
+      alt="Discord"
+    />
+  </a>
+</p>
+
+<p align="center">
+  <a href="./README.md">🇺🇸 English</a> |
+  <strong>🇧🇷 Português</strong>
+</p>
+
+</div>
+
+---
+
+O ATS Flow é um construtor de currículos leve e open source, projetado para desenvolvedores e profissionais técnicos que desejam controle total sobre seu currículo sem depender de ferramentas pagas ou editores limitados.
+
+Use o editor visual para criar seu currículo online ou edite o JSON estruturado para total reprodutibilidade.
+
+## O sistema gera:
+
+- HTML limpo compatível com ATS  
+- PDF pronto para impressão com links clicáveis  
+- JSON estruturado para portabilidade  
+
+Sem assinaturas. Sem rastreamento. Sem bloqueios.
 
 ## Por que o ATS Flow existe
 
